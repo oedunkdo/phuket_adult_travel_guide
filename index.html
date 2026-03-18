@@ -5,887 +5,621 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  :root{
-    --gold:#C9A84C;
-    --gold-light:#E8C97A;
-    --deep:#1A0A00;
-    --dark:#2D1B00;
-    --card-bg:#1E1100;
-    --text:#F5EDD6;
-    --muted:#B89A6A;
-    --accent:#FF6B6B;
-    --teal:#4ECDC4;
-  }
-  body{
-    background: #0D0700;
-    color:var(--text);
-    font-family:'Noto Sans TC',sans-serif;
-    font-weight:300;
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A84C;--gold-light:#E8C97A;--deep:#1A0A00;
+  --card-bg:#1E1100;--text:#F5EDD6;--muted:#B89A6A;
+  --accent:#FF6B6B;--teal:#4ECDC4;--green:#5DBB8A;
+  --blue:#5BA4CF;--purple:#A37BD4;
+}
+body{background:#0D0700;color:var(--text);font-family:'Noto Sans TC',sans-serif;font-weight:300;}
 
-  /* HERO */
-  .hero{
-    position:relative;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    overflow:hidden;
-    padding:4rem 2rem;
-  }
-  .hero-bg{
-    position:absolute;inset:0;
-    background: radial-gradient(ellipse at 50% 0%, #3D1F00 0%, #1A0A00 40%, #0D0700 70%);
-  }
-  .stars{position:absolute;inset:0;overflow:hidden;}
-  .star{
-    position:absolute;
-    width:2px;height:2px;
-    background:var(--gold-light);
-    border-radius:50%;
-    animation:twinkle 3s infinite alternate;
-  }
-  @keyframes twinkle{0%{opacity:0.2}100%{opacity:1}}
-  .palm-deco{
-    position:absolute;bottom:0;left:0;right:0;
-    height:120px;
-    background: linear-gradient(to top, #0D0700, transparent);
-    z-index:2;
-  }
-  .hero-badge{
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
-    color:var(--deep);
-    font-size:11px;
-    font-weight:500;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    padding:6px 20px;
-    border-radius:20px;
-    margin-bottom:1.5rem;
-    position:relative;z-index:1;
-    font-family:'Noto Sans TC',sans-serif;
-  }
-  .hero-title{
-    font-family:'Playfair Display',serif;
-    font-size:clamp(3rem,8vw,6rem);
-    font-weight:900;
-    line-height:1.05;
-    position:relative;z-index:1;
-    background: linear-gradient(135deg, var(--gold-light) 0%, #FFF8E7 50%, var(--gold) 100%);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-    text-shadow:none;
-  }
-  .hero-sub{
-    font-size:clamp(1.2rem,3vw,1.8rem);
-    color:var(--gold-light);
-    font-family:'Noto Serif TC',serif;
-    margin-top:0.5rem;
-    position:relative;z-index:1;
-    letter-spacing:4px;
-  }
-  .hero-desc{
-    max-width:600px;
-    font-size:1rem;
-    color:var(--muted);
-    margin:2rem auto 0;
-    line-height:1.8;
-    position:relative;z-index:1;
-  }
-  .hero-stats{
-    display:flex;gap:3rem;margin-top:3rem;
-    position:relative;z-index:1;
-    flex-wrap:wrap;justify-content:center;
-  }
-  .stat{text-align:center;}
-  .stat-num{
-    font-family:'Playfair Display',serif;
-    font-size:2.5rem;font-weight:700;
-    color:var(--gold-light);
-    display:block;
-  }
-  .stat-label{font-size:0.75rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+/* HERO */
+.hero{
+  background:radial-gradient(ellipse at 50% 0%,#3D1F00 0%,#1A0A00 50%,#0D0700 100%);
+  text-align:center;padding:4rem 2rem 3rem;
+}
+.hero-badge{background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold));color:#1A0A00;font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;padding:6px 20px;border-radius:20px;margin-bottom:1.5rem;display:inline-block;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,6vw,4rem);font-weight:900;background:linear-gradient(135deg,var(--gold-light),#FFF8E7,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.15;margin-bottom:0.75rem;}
+.hero-sub{color:var(--muted);font-size:0.95rem;letter-spacing:2px;}
 
-  /* GOLD DIVIDER */
-  .divider{
-    text-align:center;
-    padding:3rem 2rem 0;
-    position:relative;
-  }
-  .divider::before,.divider::after{
-    content:'';
-    position:absolute;
-    top:50%;left:0;right:0;
-    height:1px;
-    background:linear-gradient(to right, transparent, var(--gold), transparent);
-  }
+/* TABS */
+.tabs-wrap{position:sticky;top:0;z-index:100;background:#0D0700;padding:1rem 1.5rem;border-bottom:1px solid rgba(201,168,76,0.12);}
+.tabs{display:flex;gap:0.5rem;overflow-x:auto;scrollbar-width:none;max-width:1100px;margin:0 auto;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab-btn{
+  flex-shrink:0;padding:8px 18px;border-radius:20px;border:1px solid rgba(201,168,76,0.25);
+  background:transparent;color:var(--muted);font-size:0.8rem;font-family:'Noto Sans TC',sans-serif;
+  cursor:pointer;transition:all 0.25s;white-space:nowrap;letter-spacing:0.5px;
+}
+.tab-btn:hover{border-color:rgba(201,168,76,0.5);color:var(--gold-light);}
+.tab-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1A0A00;border-color:transparent;font-weight:500;}
 
-  /* SECTION HEADERS */
-  .chapter-header{
-    text-align:center;
-    padding:5rem 2rem 3rem;
-  }
-  .chapter-num{
-    font-size:0.7rem;letter-spacing:4px;color:var(--gold);
-    text-transform:uppercase;margin-bottom:0.75rem;
-    font-family:'Noto Sans TC',sans-serif;
-  }
-  .chapter-title{
-    font-family:'Playfair Display',serif;
-    font-size:clamp(2rem,5vw,3.5rem);
-    font-weight:700;
-    background: linear-gradient(135deg, var(--gold-light) 0%, #FFF8E7 100%);
-    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  }
-  .chapter-line{
-    width:60px;height:2px;
-    background:linear-gradient(to right,var(--gold),var(--gold-light));
-    margin:1.5rem auto 0;border-radius:2px;
-  }
+/* SECTIONS */
+.section{display:none;max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+.section.active{display:block;}
 
-  /* CARDS */
-  .container{max-width:1100px;margin:0 auto;padding:0 2rem 4rem;}
-  .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
-  .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;}
-  .card{
-    background: linear-gradient(135deg, #1E1100 0%, #160D00 100%);
-    border:1px solid rgba(201,168,76,0.2);
-    border-radius:16px;
-    padding:1.75rem;
-    transition:border-color 0.3s;
-    position:relative;overflow:hidden;
-  }
-  .card::before{
-    content:'';position:absolute;top:0;left:0;right:0;height:2px;
-    background:linear-gradient(to right, transparent, var(--gold), transparent);
-    opacity:0;transition:opacity 0.3s;
-  }
-  .card:hover{border-color:rgba(201,168,76,0.5);}
-  .card:hover::before{opacity:1;}
-  .card-icon{
-    width:48px;height:48px;border-radius:12px;
-    background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));
-    border:1px solid rgba(201,168,76,0.3);
-    display:flex;align-items:center;justify-content:center;
-    font-size:22px;margin-bottom:1rem;
-  }
-  .card-title{
-    font-family:'Noto Serif TC',serif;
-    font-size:1.1rem;font-weight:700;color:var(--gold-light);
-    margin-bottom:0.75rem;
-  }
-  .card-body{font-size:0.9rem;color:var(--muted);line-height:1.8;}
-  .card-body strong{color:var(--text);font-weight:500;}
+/* ENTRY CARD - main pattern */
+.entry{
+  background:linear-gradient(135deg,#1E1100,#160D00);
+  border:1px solid rgba(201,168,76,0.18);border-radius:16px;
+  margin-bottom:1.25rem;overflow:hidden;
+  transition:border-color 0.3s;
+}
+.entry:hover{border-color:rgba(201,168,76,0.4);}
+.entry-header{
+  display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;
+  background:linear-gradient(135deg,rgba(201,168,76,0.08),transparent);
+  border-bottom:1px solid rgba(201,168,76,0.1);flex-wrap:wrap;
+}
+.entry-icon{
+  width:52px;height:52px;border-radius:12px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:24px;
+  background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);
+}
+.entry-meta{flex:1;min-width:180px;}
+.entry-name{font-family:'Noto Serif TC',serif;font-size:1.1rem;color:var(--text);margin-bottom:3px;}
+.entry-loc{font-size:0.78rem;color:var(--gold);margin-bottom:4px;}
+.entry-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
+.etag{font-size:0.65rem;padding:2px 9px;border-radius:20px;letter-spacing:0.5px;}
+.etag.walk{background:rgba(93,187,138,0.12);border:1px solid rgba(93,187,138,0.25);color:var(--green);}
+.etag.grab{background:rgba(91,164,207,0.12);border:1px solid rgba(91,164,207,0.25);color:var(--blue);}
+.etag.song{background:rgba(163,123,212,0.12);border:1px solid rgba(163,123,212,0.25);color:var(--purple);}
+.etag.tuk{background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);color:var(--gold);}
+.etag.boat{background:rgba(78,205,196,0.12);border:1px solid rgba(78,205,196,0.25);color:var(--teal);}
+.etag.bus{background:rgba(255,107,107,0.12);border:1px solid rgba(255,107,107,0.25);color:var(--accent);}
+.entry-body{padding:1.25rem 1.5rem;}
+.transport-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+.transport-item{
+  background:rgba(0,0,0,0.2);border:1px solid rgba(201,168,76,0.08);
+  border-radius:10px;padding:1rem;
+}
+.ti-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.6rem;}
+.ti-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.ti-dot.walk{background:var(--green);}
+.ti-dot.grab{background:var(--blue);}
+.ti-dot.song{background:var(--purple);}
+.ti-dot.tuk{background:var(--gold);}
+.ti-dot.boat{background:var(--teal);}
+.ti-dot.bus{background:var(--accent);}
+.ti-label{font-size:0.78rem;color:var(--text);font-weight:500;}
+.ti-body{font-size:0.78rem;color:var(--muted);line-height:1.65;}
+.ti-price{
+  display:inline-block;margin-top:0.5rem;font-size:0.73rem;
+  color:var(--gold);background:rgba(201,168,76,0.08);
+  border:1px solid rgba(201,168,76,0.2);padding:2px 9px;border-radius:20px;
+}
+.entry-note{
+  margin-top:1rem;padding:0.9rem 1rem;
+  background:rgba(201,168,76,0.04);border-left:2px solid var(--gold);
+  border-radius:0 8px 8px 0;font-size:0.8rem;color:var(--muted);line-height:1.65;
+}
+.entry-note strong{color:var(--gold-light);}
 
-  /* TIMELINE */
-  .timeline{position:relative;padding:0 2rem;}
-  .timeline::before{
-    content:'';position:absolute;left:50%;top:0;bottom:0;
-    width:1px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);
-    transform:translateX(-50%);
-  }
-  .tl-item{
-    display:grid;grid-template-columns:1fr 60px 1fr;
-    gap:0;margin-bottom:2rem;align-items:center;
-  }
-  .tl-content{padding:1.5rem;}
-  .tl-left{text-align:right;}
-  .tl-dot{
-    width:40px;height:40px;
-    border-radius:50%;
-    background:linear-gradient(135deg,var(--gold),var(--gold-light));
-    display:flex;align-items:center;justify-content:center;
-    font-size:14px;font-weight:700;color:var(--deep);
-    margin:0 auto;z-index:1;position:relative;
-    box-shadow:0 0 20px rgba(201,168,76,0.3);
-  }
-  .tl-day{
-    font-family:'Playfair Display',serif;
-    font-size:1.3rem;color:var(--gold-light);margin-bottom:0.5rem;
-  }
-  .tl-text{font-size:0.85rem;color:var(--muted);line-height:1.7;}
-  .tl-text strong{color:var(--text);}
+/* FOOD AREA TAG */
+.area-label{
+  display:inline-block;margin-bottom:0.4rem;
+  font-size:0.65rem;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--teal);background:rgba(78,205,196,0.08);
+  border:1px solid rgba(78,205,196,0.2);padding:2px 9px;border-radius:20px;
+}
 
-  /* TRANSPORT TABLE */
-  .route-card{
-    background:linear-gradient(135deg,#1E1100,#160D00);
-    border:1px solid rgba(201,168,76,0.2);
-    border-radius:16px;overflow:hidden;
-  }
-  .route-header{
-    background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));
-    padding:1.25rem 1.5rem;
-    border-bottom:1px solid rgba(201,168,76,0.15);
-    display:flex;align-items:center;gap:0.75rem;
-  }
-  .route-header-icon{font-size:20px;}
-  .route-header-title{font-family:'Noto Serif TC',serif;font-size:1rem;color:var(--gold-light);}
-  .route-body{padding:1.5rem;}
-  .route-step{
-    display:flex;align-items:flex-start;gap:1rem;
-    padding:0.75rem 0;border-bottom:1px solid rgba(201,168,76,0.08);
-  }
-  .route-step:last-child{border-bottom:none;}
-  .step-num{
-    min-width:28px;height:28px;border-radius:50%;
-    background:rgba(201,168,76,0.1);
-    border:1px solid rgba(201,168,76,0.3);
-    display:flex;align-items:center;justify-content:center;
-    font-size:11px;color:var(--gold);font-weight:500;
-  }
-  .step-info{flex:1;}
-  .step-title{font-size:0.9rem;color:var(--text);font-weight:500;margin-bottom:3px;}
-  .step-detail{font-size:0.78rem;color:var(--muted);line-height:1.6;}
-  .step-time{
-    background:rgba(201,168,76,0.1);
-    border:1px solid rgba(201,168,76,0.2);
-    border-radius:8px;padding:3px 10px;
-    font-size:0.75rem;color:var(--gold);
-    white-space:nowrap;align-self:flex-start;
-  }
+/* LEGEND */
+.legend{
+  display:flex;flex-wrap:wrap;gap:0.6rem;
+  padding:1rem 1.5rem;background:rgba(201,168,76,0.04);
+  border:1px solid rgba(201,168,76,0.12);border-radius:12px;margin-bottom:2rem;
+}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:0.73rem;color:var(--muted);}
+.leg-dot{width:8px;height:8px;border-radius:50%;}
 
-  /* VENUE CARDS */
-  .venue-card{
-    background:linear-gradient(135deg,#1E1100,#160D00);
-    border:1px solid rgba(201,168,76,0.2);
-    border-radius:16px;overflow:hidden;
-    transition:transform 0.3s,border-color 0.3s;
-  }
-  .venue-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,0.5);}
-  .venue-top{
-    padding:1.5rem 1.5rem 1rem;
-    background:linear-gradient(135deg,rgba(201,168,76,0.08),transparent);
-    border-bottom:1px solid rgba(201,168,76,0.1);
-  }
-  .venue-badge{
-    display:inline-block;
-    background:rgba(201,168,76,0.15);
-    border:1px solid rgba(201,168,76,0.3);
-    color:var(--gold);
-    font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;
-    padding:3px 10px;border-radius:20px;margin-bottom:0.75rem;
-  }
-  .venue-name{font-family:'Noto Serif TC',serif;font-size:1.15rem;color:var(--text);margin-bottom:0.5rem;}
-  .venue-area{font-size:0.8rem;color:var(--muted);}
-  .venue-body{padding:1.25rem 1.5rem;}
-  .venue-desc{font-size:0.85rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;}
-  .venue-tags{display:flex;flex-wrap:wrap;gap:6px;}
-  .tag{
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.08);
-    color:rgba(255,255,255,0.5);
-    font-size:0.7rem;padding:3px 10px;border-radius:20px;
-  }
-  .tag.hot{background:rgba(255,107,107,0.1);border-color:rgba(255,107,107,0.2);color:var(--accent);}
+/* SECTION TITLE */
+.sec-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--gold-light);margin-bottom:0.4rem;}
+.sec-sub{font-size:0.82rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.6;}
 
-  /* FOOD GRID */
-  .food-item{
-    display:flex;gap:1.25rem;
-    background:linear-gradient(135deg,#1E1100,#160D00);
-    border:1px solid rgba(201,168,76,0.15);
-    border-radius:12px;padding:1.25rem;align-items:flex-start;
-    transition:border-color 0.3s;
-  }
-  .food-item:hover{border-color:rgba(201,168,76,0.4);}
-  .food-emoji{font-size:2.5rem;line-height:1;}
-  .food-info h4{font-family:'Noto Serif TC',serif;font-size:1rem;color:var(--gold-light);margin-bottom:0.4rem;}
-  .food-info p{font-size:0.82rem;color:var(--muted);line-height:1.7;}
-  .food-price{
-    display:inline-block;margin-top:0.5rem;
-    font-size:0.8rem;color:var(--teal);
-    background:rgba(78,205,196,0.08);
-    border:1px solid rgba(78,205,196,0.2);
-    padding:2px 10px;border-radius:20px;
-  }
-
-  /* BUDGET TABLE */
-  .budget-table{width:100%;border-collapse:collapse;font-size:0.9rem;}
-  .budget-table th{
-    background:rgba(201,168,76,0.1);
-    color:var(--gold);font-weight:500;
-    padding:1rem 1.25rem;text-align:left;
-    border-bottom:1px solid rgba(201,168,76,0.2);
-    font-size:0.8rem;letter-spacing:1px;
-  }
-  .budget-table td{
-    padding:0.9rem 1.25rem;border-bottom:1px solid rgba(201,168,76,0.06);
-    color:var(--muted);vertical-align:top;
-  }
-  .budget-table tr:last-child td{border-bottom:none;}
-  .budget-table .item-name{color:var(--text);}
-  .budget-table .price{color:var(--gold-light);font-weight:500;white-space:nowrap;}
-  .budget-table .total-row td{
-    background:rgba(201,168,76,0.08);
-    color:var(--gold-light);font-weight:500;
-    font-family:'Noto Serif TC',serif;
-  }
-
-  /* HOTEL CARD */
-  .hotel-card{
-    display:flex;align-items:flex-start;gap:1.25rem;
-    background:linear-gradient(135deg,#1E1100,#160D00);
-    border:1px solid rgba(201,168,76,0.2);
-    border-radius:16px;padding:1.5rem;
-  }
-  .hotel-star{
-    min-width:48px;height:48px;border-radius:12px;
-    background:linear-gradient(135deg,var(--gold),var(--gold-light));
-    display:flex;align-items:center;justify-content:center;
-    color:var(--deep);font-size:1.2rem;font-weight:700;
-    font-family:'Playfair Display',serif;
-  }
-  .hotel-info h4{font-family:'Noto Serif TC',serif;font-size:1.05rem;color:var(--text);margin-bottom:0.4rem;}
-  .hotel-info .hotel-area{font-size:0.8rem;color:var(--gold);margin-bottom:0.5rem;}
-  .hotel-info p{font-size:0.82rem;color:var(--muted);line-height:1.7;}
-
-  /* TIPS BOX */
-  .tips-box{
-    background:rgba(201,168,76,0.06);
-    border:1px solid rgba(201,168,76,0.2);
-    border-left:3px solid var(--gold);
-    border-radius:0 12px 12px 0;
-    padding:1.25rem 1.5rem;
-  }
-  .tips-box h4{font-family:'Noto Serif TC',serif;color:var(--gold-light);font-size:0.95rem;margin-bottom:0.75rem;}
-  .tips-box ul{list-style:none;padding:0;}
-  .tips-box li{font-size:0.85rem;color:var(--muted);padding:4px 0;padding-left:1rem;position:relative;line-height:1.6;}
-  .tips-box li::before{content:'›';position:absolute;left:0;color:var(--gold);}
-
-  /* FOOTER */
-  .footer{
-    text-align:center;padding:4rem 2rem;
-    border-top:1px solid rgba(201,168,76,0.1);
-    margin-top:4rem;
-  }
-  .footer-title{
-    font-family:'Playfair Display',serif;
-    font-size:2rem;font-weight:700;
-    background:linear-gradient(135deg,var(--gold-light),#FFF8E7,var(--gold));
-    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-    margin-bottom:1rem;
-  }
-  .footer-text{font-size:0.85rem;color:var(--muted);max-width:500px;margin:0 auto;}
-
-  @media(max-width:600px){
-    .timeline::before{left:30px;}
-    .tl-item{grid-template-columns:1fr;gap:0;}
-    .tl-left{text-align:left;order:2;}
-    .tl-dot{width:32px;height:32px;margin:0;}
-    .hero-stats{gap:1.5rem;}
-  }
+@media(max-width:600px){
+  .entry-header{gap:0.75rem;}
+  .transport-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="stars" id="stars"></div>
-  <div class="palm-deco"></div>
-  <div class="hero-badge">✦ PHUKET ADULTS ONLY ✦</div>
-  <h1 class="hero-title">普吉島<br>極樂之旅</h1>
-  <p class="hero-sub">成人限定 · 極致放縱</p>
-  <p class="hero-desc">從台灣出發，踏上泰國最狂野的海島。<br>五天四夜，感受普吉島日與夜的雙重魅力。</p>
-  <div class="hero-stats">
-    <div class="stat"><span class="stat-num">5</span><span class="stat-label">天 四 夜</span></div>
-    <div class="stat"><span class="stat-num">5</span><span class="stat-label">大 主 題</span></div>
-    <div class="stat"><span class="stat-num">NT$</span><span class="stat-label">費用全攻略</span></div>
-  </div>
-</section>
+<div class="hero">
+  <div class="hero-badge">✦ PHUKET TRANSPORT GUIDE ✦</div>
+  <h1 class="hero-title">景點 & 小吃<br>交通全攻略</h1>
+  <p class="hero-sub">從帕東出發 · 每個地點都有詳細交通方式</p>
+</div>
 
-<!-- CHAPTER 1 -->
-<section id="ch1">
-  <div class="chapter-header">
-    <div class="chapter-num">Chapter One</div>
-    <h2 class="chapter-title">旅行行程規劃</h2>
-    <div class="chapter-line"></div>
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('attractions')">🌙 夜生活景點</button>
+    <button class="tab-btn" onclick="showTab('sights')">🌅 白天景點</button>
+    <button class="tab-btn" onclick="showTab('islands')">🌊 島嶼出海</button>
+    <button class="tab-btn" onclick="showTab('food')">🍜 著名小吃</button>
   </div>
-  <div class="container">
+</div>
 
-    <!-- 時程 -->
-    <div style="margin-bottom:3rem;">
-      <div class="chapter-num" style="text-align:center;margin-bottom:2rem;">✦ 五天四夜行程總覽 ✦</div>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-content tl-left">
-            <div class="tl-day">Day 1 — 抵達</div>
-            <div class="tl-text"><strong>台灣 → 普吉島</strong><br>入住酒店，Patong Beach 海灘漫步<br>傍晚至 Bangla Road 初探夜生活</div>
-          </div>
-          <div class="tl-dot">1</div>
-          <div class="tl-content"></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-content"></div>
-          <div class="tl-dot">2</div>
-          <div class="tl-content">
-            <div class="tl-day">Day 2 — 白天探索</div>
-            <div class="tl-text"><strong>普吉島白天行程</strong><br>舊城區文化漫遊 → Promthep Cape 觀景<br>下午 Patong Beach 水上活動<br>晚上 Simon Cabaret 人妖秀</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-content tl-left">
-            <div class="tl-day">Day 3 — 海島巡禮</div>
-            <div class="tl-text"><strong>海上一日遊</strong><br>皮皮島 / 珊瑚島浮潛<br>晚上 Tiger Night Club 狂歡夜</div>
-          </div>
-          <div class="tl-dot">3</div>
-          <div class="tl-content"></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-content"></div>
-          <div class="tl-dot">4</div>
-          <div class="tl-content">
-            <div class="tl-day">Day 4 — 夜生活全體驗</div>
-            <div class="tl-text"><strong>成人娛樂精華日</strong><br>下午 Spa / 按摩放鬆<br>入夜 Patong GoGo Bar 巡禮<br>深夜 Bangla Road 狂歡</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-content tl-left">
-            <div class="tl-day">Day 5 — 返台</div>
-            <div class="tl-text"><strong>帶著回憶離開</strong><br>早晨市場採購伴手禮<br>下午航班返回台灣</div>
-          </div>
-          <div class="tl-dot">5</div>
-          <div class="tl-content"></div>
+<!-- TAB 1: 夜生活景點 -->
+<div class="section active" id="attractions">
+  <p class="sec-title" style="margin-top:0;">夜生活景點交通</p>
+  <p class="sec-sub">以下景點均位於 Patong 帕東區，若住宿在此區，大部分步行即可抵達。</p>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>步行 Walk</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--blue)"></div>Grab 叫車</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--purple)"></div>宋條車 Songthaew</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--gold)"></div>嘟嘟車 Tuk Tuk</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--teal)"></div>船 Boat</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--accent)"></div>巴士 Bus</div>
+  </div>
+
+  <!-- Bangla Road -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">🌙</div>
+      <div class="entry-meta">
+        <div class="entry-name">Bangla Road 邦拉路</div>
+        <div class="entry-loc">📍 Patong 中心 · 距海灘約 200 公尺</div>
+        <div class="entry-tags">
+          <span class="etag walk">步行首選</span>
+          <span class="etag tuk">嘟嘟車</span>
         </div>
       </div>
     </div>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot walk"></div><div class="ti-label">步行（最推薦）</div></div>
+          <div class="ti-body">住在 Patong 區的旅客直接步行即可。從帕東海灘步行約 3–5 分鐘。夜晚 9 點後封街禁止車輛進入，步行是唯一方式。</div>
+          <span class="ti-price">免費</span>
+        </div>
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot tuk"></div><div class="ti-label">嘟嘟車 Tuk Tuk</div></div>
+          <div class="ti-body">若從 Patong 區外入住，可搭嘟嘟車至 Bangla Road 入口。需事先議價，不要讓嘟嘟車繞路。</div>
+          <span class="ti-price">100–200 泰銖</span>
+        </div>
+      </div>
+      <div class="entry-note">⚡ <strong>小提醒：</strong>深夜離開時，Bangla Road 封街內打不到車，需步行至出口再叫 Grab。建議出發前先預叫好時間。</div>
+    </div>
+  </div>
 
-    <!-- 住宿建議 -->
-    <div style="margin-bottom:3rem;">
-      <div class="chapter-num" style="text-align:center;margin-bottom:1.5rem;">✦ 住宿建議 · 交通便利優先 ✦</div>
-      <div style="display:flex;flex-direction:column;gap:1rem;">
-        <div class="hotel-card">
-          <div class="hotel-star">★★</div>
-          <div class="hotel-info">
-            <h4>Novotel Phuket Surin Beach Resort</h4>
-            <div class="hotel-area">📍 Patong 核心區 · 步行至 Bangla Road 5 分鐘</div>
-            <p>國際連鎖品質保證，鄰近夜生活核心，大型游泳池，雙人房約 <strong style="color:var(--gold-light)">NT$2,800–4,500/晚</strong></p>
-          </div>
+  <!-- Simon Cabaret -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">💃</div>
+      <div class="entry-meta">
+        <div class="entry-name">Simon Cabaret 西蒙人妖秀</div>
+        <div class="entry-loc">📍 8 Sirirat Rd, Patong · 距 Bangla Road 步行約 10 分鐘</div>
+        <div class="entry-tags">
+          <span class="etag walk">步行可達</span>
+          <span class="etag grab">Grab</span>
+          <span class="etag tuk">嘟嘟車</span>
         </div>
-        <div class="hotel-card">
-          <div class="hotel-star">★★</div>
-          <div class="hotel-info">
-            <h4>Patong Heritage Hotel</h4>
-            <div class="hotel-area">📍 Patong 中心 · 直達海灘步行 3 分鐘</div>
-            <p>殖民地風格精品酒店，位置絕佳，雙人房約 <strong style="color:var(--gold-light)">NT$2,200–3,800/晚</strong></p>
-          </div>
+      </div>
+    </div>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot walk"></div><div class="ti-label">步行（住 Patong 者）</div></div>
+          <div class="ti-body">從 Bangla Road 沿海灘路南行，步行約 10–15 分鐘可抵達。晚上天氣涼爽可選步行，沿途有小吃可邊逛邊走。</div>
+          <span class="ti-price">免費</span>
         </div>
-        <div class="hotel-card">
-          <div class="hotel-star">★★</div>
-          <div class="hotel-info">
-            <h4>Malai Hostel Patong（背包客首選）</h4>
-            <div class="hotel-area">📍 Patong Beach Road · 步行至所有景點</div>
-            <p>乾淨現代風格，背包旅行者聚集，私人套房約 <strong style="color:var(--gold-light)">NT$800–1,500/晚</strong></p>
-          </div>
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot grab"></div><div class="ti-label">Grab 叫車</div></div>
+          <div class="ti-body">從 Patong 中心叫 Grab 約 5–10 分鐘車程，建議演出前 30 分鐘出發，表演結束後現場客人多，要稍等一下才叫到車。</div>
+          <span class="ti-price">60–120 泰銖</span>
+        </div>
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot tuk"></div><div class="ti-label">嘟嘟車 Tuk Tuk</div></div>
+          <div class="ti-body">現場或在路上攔截，需議價。演出結束後現場就有嘟嘟車等候接送旅客，方便但價格較高。</div>
+          <span class="ti-price">100–200 泰銖</span>
+        </div>
+      </div>
+      <div class="entry-note">🎭 <strong>小提醒：</strong>表演時間 18:00 / 19:30 / 21:00，每場約 75 分鐘。建議提前 20 分鐘到場，出入口在 Sirirat Road，與 Bangla Road 南端相近。</div>
+    </div>
+  </div>
+
+  <!-- GoGo Bar / Soi Sea Dragon -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">🍺</div>
+      <div class="entry-meta">
+        <div class="entry-name">GoGo Bar · Soi Sea Dragon / Soi Gonzo</div>
+        <div class="entry-loc">📍 Bangla Road 旁巷弄 · 步行即達</div>
+        <div class="entry-tags">
+          <span class="etag walk">步行唯一方式</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot walk"></div><div class="ti-label">步行（唯一方式）</div></div>
+          <div class="ti-body">Soi Sea Dragon 與 Soi Gonzo 均是 Bangla Road 旁的小巷，從 Bangla Road 主街步行進入即可，車輛無法進入，只能步行探索。</div>
+          <span class="ti-price">免費</span>
+        </div>
+      </div>
+      <div class="entry-note">🗺 <strong>位置說明：</strong>Soi Sea Dragon 在 Bangla Road 中段右側巷弄，Soi Gonzo 稍靠近海灘端。進了 Bangla Road 慢慢走，轉角就能看到招牌。</div>
+    </div>
+  </div>
+
+  <!-- Tiger Night Club -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">🎵</div>
+      <div class="entry-meta">
+        <div class="entry-name">Tiger Night Club</div>
+        <div class="entry-loc">📍 Bangla Road 正中心 · 步行即達</div>
+        <div class="entry-tags">
+          <span class="etag walk">步行</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot walk"></div><div class="ti-label">步行（住 Patong 者）</div></div>
+          <div class="ti-body">Tiger Club 位於 Bangla Road 正中段，是整條街最顯眼的建築之一。從任何帕東海灘路的地點步行 5–10 分鐘即達，夜晚封街後只能步行前往。</div>
+          <span class="ti-price">免費</span>
+        </div>
+      </div>
+      <div class="entry-note">🌙 <strong>時間提示：</strong>Tiger 凌晨 2 點後才開始最熱鬧，離開時請步行至 Bangla Road 出口後再叫 Grab，封街內叫不到車。</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 2: 白天景點 -->
+<div class="section" id="sights">
+  <p class="sec-title" style="margin-top:0;">白天景點交通</p>
+  <p class="sec-sub">以下景點距帕東較遠，需要安排交通工具。出發基準地：Patong Beach 帕東海灘。</p>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>步行 Walk</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--blue)"></div>Grab 叫車</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--purple)"></div>宋條車 Songthaew</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--gold)"></div>嘟嘟車 Tuk Tuk</div>
+  </div>
+
+  <!-- Phuket Old Town -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">🏛</div>
+      <div class="entry-meta">
+        <div class="entry-name">普吉舊城區 Phuket Old Town</div>
+        <div class="entry-loc">📍 距 Patong 約 15 km · 車程 15–40 分鐘</div>
+        <div class="entry-tags">
+          <span class="etag grab">Grab 推薦</span>
+          <span class="etag song">宋條車</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot grab"></div><div class="ti-label">Grab（最方便）</div></div>
+          <div class="ti-body">從帕東叫 Grab 前往舊城區，車程約 20–30 分鐘（視交通狀況）。透明計費，不用擔心被坑。建議來回各叫一次。</div>
+          <span class="ti-price">單程 350–500 泰銖</span>
+        </div>
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot song"></div><div class="ti-label">宋條車（最省錢）</div></div>
+          <div class="ti-body">從 Patong 搭藍色宋條車至 Phuket Town，每 30 分鐘一班，車程約 50 分鐘。終點站在 Ranong Road 中央市場旁，6:00–18:00 運行。</div>
+          <span class="ti-price">單程 40–50 泰銖</span>
+        </div>
+      </div>
+      <div class="entry-note">🗺 <strong>到達後：</strong>舊城區內步行即可，Thalang Road 與 Dibuk Road 是精華街道，葡式老建築、咖啡廳、小吃攤密集，徒步約 1–2 小時可逛完核心區。</div>
+    </div>
+  </div>
+
+  <!-- Promthep Cape -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">🌅</div>
+      <div class="entry-meta">
+        <div class="entry-name">普密蓬角 Promthep Cape</div>
+        <div class="entry-loc">📍 普吉島最南端 · 距 Patong 約 20 km</div>
+        <div class="entry-tags">
+          <span class="etag grab">Grab 推薦</span>
+          <span class="etag tuk">嘟嘟車</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot grab"></div><div class="ti-label">Grab（最推薦）</div></div>
+          <div class="ti-body">Grab 從帕東前往約 30–45 分鐘，日落前建議提早出發（下午 4–5 點），日落時段交通較擁擠。建議到達後讓司機等候，或事先預約返程。</div>
+          <span class="ti-price">單程 400–600 泰銖</span>
+        </div>
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot tuk"></div><div class="ti-label">嘟嘟車包車</div></div>
+          <div class="ti-body">可在 Patong 與嘟嘟車司機議好包車前往，含等候 1–2 小時再返回帕東，較為划算。需英語或肢體語言溝通。</div>
+          <span class="ti-price">來回包車 600–1,000 泰銖</span>
+        </div>
+      </div>
+      <div class="entry-note">🌇 <strong>時間提示：</strong>Promthep Cape 日落大約 18:00–18:30（視季節），建議下午 4:30 出發，日落後現場叫 Grab 車輛較少，建議提前 15 分鐘叫車等候。</div>
+    </div>
+  </div>
+
+  <!-- Let's Relax Spa -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">💆</div>
+      <div class="entry-meta">
+        <div class="entry-name">Let's Relax Spa 按摩中心</div>
+        <div class="entry-loc">📍 Patong 區多處門市 · 部分步行可達</div>
+        <div class="entry-tags">
+          <span class="etag walk">步行（部分門市）</span>
+          <span class="etag grab">Grab</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot walk"></div><div class="ti-label">步行（Patong 分店）</div></div>
+          <div class="ti-body">Let's Relax 在 Patong 區有多家分店，其中 Jungceylon 購物中心內有分店，從 Bangla Road 步行約 5 分鐘可抵達購物中心。</div>
+          <span class="ti-price">免費</span>
+        </div>
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot grab"></div><div class="ti-label">Grab（前往其他分店）</div></div>
+          <div class="ti-body">若預約其他區域的分店，可叫 Grab 前往，車程通常 10–20 分鐘。建議提前在官網或 Klook 預約，避免現場等候。</div>
+          <span class="ti-price">100–300 泰銖</span>
         </div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- CHAPTER 2 -->
-<section id="ch2">
-  <div class="chapter-header">
-    <div class="chapter-num">Chapter Two</div>
-    <h2 class="chapter-title">交通規劃</h2>
-    <div class="chapter-line"></div>
-  </div>
-  <div class="container">
-    <div class="grid-2" style="margin-bottom:2rem;">
-      <!-- 台灣到普吉 -->
-      <div class="route-card">
-        <div class="route-header">
-          <div class="route-header-icon">✈️</div>
-          <div class="route-header-title">台灣 → 普吉島（國際段）</div>
-        </div>
-        <div class="route-body">
-          <div class="route-step">
-            <div class="step-num">1</div>
-            <div class="step-info">
-              <div class="step-title">台北桃園機場（TPE）出發</div>
-              <div class="step-detail">中華航空 / 泰國航空 / 曼谷航空直航或轉機<br>建議查詢含曼谷轉機票價更優惠</div>
-            </div>
-            <div class="step-time">約 4–6h</div>
-          </div>
-          <div class="route-step">
-            <div class="step-num">2</div>
-            <div class="step-info">
-              <div class="step-title">抵達普吉國際機場（HKT）</div>
-              <div class="step-detail">入境後換泰銖，購買 SIM 卡<br>AIS Tourist SIM 推薦（7天不限流量）</div>
-            </div>
-            <div class="step-time">抵達</div>
-          </div>
-          <div class="route-step">
-            <div class="step-num">3</div>
-            <div class="step-info">
-              <div class="step-title">機場 → 帕東（Patong）</div>
-              <div class="step-detail">機場巴士 Route 6（最便宜）或預訂 Grab 拼車<br>避免機場白牌計程車高價宰客</div>
-            </div>
-            <div class="step-time">約 45min</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 普吉島內交通 -->
-      <div class="route-card">
-        <div class="route-header">
-          <div class="route-header-icon">🛺</div>
-          <div class="route-header-title">普吉島內移動指南</div>
-        </div>
-        <div class="route-body">
-          <div class="route-step">
-            <div class="step-num">★</div>
-            <div class="step-info">
-              <div class="step-title">Grab App（強力推薦）</div>
-              <div class="step-detail">東南亞版 Uber，透明計費無詐騙<br>可叫車 / 叫摩托車 / 叫 Tuk Tuk</div>
-            </div>
-            <div class="step-time">最推薦</div>
-          </div>
-          <div class="route-step">
-            <div class="step-num">★</div>
-            <div class="step-info">
-              <div class="step-title">宋條車 Songthaew（雙排車）</div>
-              <div class="step-detail">普吉島公共交通，固定路線<br>Patong ↔ Phuket Town 單程約 30–50 泰銖</div>
-            </div>
-            <div class="step-time">最便宜</div>
-          </div>
-          <div class="route-step">
-            <div class="step-num">★</div>
-            <div class="step-info">
-              <div class="step-title">租借摩托車</div>
-              <div class="step-detail">日租約 200–300 泰銖，自由度最高<br>注意：需持有效駕照，不戴安全帽罰款</div>
-            </div>
-            <div class="step-time">自由行</div>
-          </div>
-          <div class="route-step">
-            <div class="step-num">★</div>
-            <div class="step-info">
-              <div class="step-title">嘟嘟車 Tuk Tuk</div>
-              <div class="step-detail">短途代步、拍照必體驗<br>須事先議價，帕東區約 100–200 泰銖</div>
-            </div>
-            <div class="step-time">體驗感</div>
-          </div>
+  <!-- 大象保護區 -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">🐘</div>
+      <div class="entry-meta">
+        <div class="entry-name">大象保護區 Elephant Sanctuary</div>
+        <div class="entry-loc">📍 市區外 20–30 分鐘車程</div>
+        <div class="entry-tags">
+          <span class="etag bus">套裝接送（推薦）</span>
+          <span class="etag grab">Grab</span>
         </div>
       </div>
     </div>
-
-    <div class="tips-box">
-      <h4>🗺 交通貼士</h4>
-      <ul>
-        <li>下載 Grab 並綁定信用卡，是普吉島最聰明的交通選擇</li>
-        <li>帕東區（Patong）徒步可達大部分夜生活場所，住在此區最方便</li>
-        <li>島嶼一日遊建議透過飯店或旅行社訂購含接送的套裝行程</li>
-        <li>深夜從 Bangla Road 返回，建議提前叫好 Grab 避免等候</li>
-        <li>白天天氣炎熱，短途移動不超過 1km 可步行，其餘請叫車</li>
-      </ul>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot bus"></div><div class="ti-label">套裝行程含接送（最推薦）</div></div>
+          <div class="ti-body">強烈建議透過 Klook / GetYourGuide / 飯店訂購含接送的半日遊套裝。套裝通常含從帕東酒店接送，省去自行前往的麻煩。</div>
+          <span class="ti-price">套裝約 1,500–2,500 泰銖/人</span>
+        </div>
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot grab"></div><div class="ti-label">Grab 自行前往</div></div>
+          <div class="ti-body">自行叫 Grab 前往，車程約 25–35 分鐘，但需注意返程在偏遠地點不一定叫得到車，建議讓司機等候或告知園區協助安排返程。</div>
+          <span class="ti-price">單程 300–500 泰銖</span>
+        </div>
+      </div>
+      <div class="entry-note">🌿 <strong>推薦象園：</strong>Elephant Jungle Sanctuary Phuket / Phuket Elephant Care — 均為無騎象的倫理象園，需提前網路預訂，接送服務務必在訂票時確認包含。</div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- CHAPTER 3 -->
-<section id="ch3">
-  <div class="chapter-header">
-    <div class="chapter-num">Chapter Three</div>
-    <h2 class="chapter-title">成人娛樂景點</h2>
-    <div class="chapter-line"></div>
+<!-- TAB 3: 島嶼出海 -->
+<div class="section" id="islands">
+  <p class="sec-title" style="margin-top:0;">島嶼出海交通</p>
+  <p class="sec-sub">普吉島出海需搭乘快艇或渡輪，所有行程均建議提前預訂含接送套裝。</p>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--teal)"></div>快艇 Speedboat</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--blue)"></div>渡輪 Ferry</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--accent)"></div>套裝接送</div>
   </div>
-  <div class="container">
-    <div class="grid-2" style="margin-bottom:3rem;">
 
-      <div class="venue-card">
-        <div class="venue-top">
-          <div class="venue-badge">🌙 夜生活地標</div>
-          <div class="venue-name">Bangla Road 邦拉路</div>
-          <div class="venue-area">📍 Patong Beach · 每晚 9PM–4AM</div>
-        </div>
-        <div class="venue-body">
-          <p class="venue-desc">普吉島最著名的成人娛樂街，全長約 400 公尺，夜晚封街禁止行車。GoGo Bar、酒吧、街頭表演、霓虹燈管、音樂震耳欲聾，是整個東南亞最著名的夜生活聖地之一。</p>
-          <div class="venue-tags">
-            <span class="tag hot">必去</span>
-            <span class="tag">免費入場</span>
-            <span class="tag">酒水消費</span>
-            <span class="tag">全夜通宵</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="venue-card">
-        <div class="venue-top">
-          <div class="venue-badge">💃 成人秀場</div>
-          <div class="venue-name">Simon Cabaret 西蒙人妖秀</div>
-          <div class="venue-area">📍 Patong · 表演 6PM / 7:30PM / 9PM</div>
-        </div>
-        <div class="venue-body">
-          <p class="venue-desc">全普吉島最豪華的人妖秀劇場，耗資千萬打造。約 60 位表演者，金碧輝煌的舞台布景、精緻服裝，視覺震撼感十足。演後可與演員合影留念。</p>
-          <div class="venue-tags">
-            <span class="tag hot">必看</span>
-            <span class="tag">門票 800–1200 泰銖</span>
-            <span class="tag">需預訂</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="venue-card">
-        <div class="venue-top">
-          <div class="venue-badge">🍺 GoGo Bar</div>
-          <div class="venue-name">Soi Gonzo / Soi Sea Dragon</div>
-          <div class="venue-area">📍 Bangla Road 旁巷弄</div>
-        </div>
-        <div class="venue-body">
-          <p class="venue-desc">Bangla Road 旁的巷弄聚集了普吉最集中的 GoGo Bar 區。Soi Gonzo 以開放式舞台聞名，Soi Sea Dragon 是最熱鬧的一條巷。入場通常免費，消費一杯啤酒約 100–200 泰銖。</p>
-          <div class="venue-tags">
-            <span class="tag hot">人氣</span>
-            <span class="tag">18歲以上</span>
-            <span class="tag">現金消費</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="venue-card">
-        <div class="venue-top">
-          <div class="venue-badge">🎵 夜店</div>
-          <div class="venue-name">Tiger Night Club</div>
-          <div class="venue-area">📍 Bangla Road 正中心</div>
-        </div>
-        <div class="venue-body">
-          <p class="venue-desc">普吉最知名夜店之一，三層樓的娛樂空間，各樓層風格不同，底層舞池、上層酒吧、露台。DJ 駐場，音樂以 EDM 為主，每晚人潮爆滿，凌晨後最熱鬧。</p>
-          <div class="venue-tags">
-            <span class="tag hot">夜店王</span>
-            <span class="tag">免費入場</span>
-            <span class="tag">消費制</span>
-            <span class="tag">開到天亮</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="venue-card">
-        <div class="venue-top">
-          <div class="venue-badge">💆 按摩 SPA</div>
-          <div class="venue-name">普吉傳統泰式按摩</div>
-          <div class="venue-area">📍 Patong Beach Road 沿線</div>
-        </div>
-        <div class="venue-body">
-          <p class="venue-desc">白天的完美放鬆選擇。正規按摩店家密集，腳底按摩 1 小時約 200–300 泰銖，全身泰式按摩 2 小時約 400–600 泰銖。推薦評分高的連鎖品牌如 Let's Relax Spa。</p>
-          <div class="venue-tags">
-            <span class="tag">平價放鬆</span>
-            <span class="tag">日夜皆宜</span>
-            <span class="tag">選正規店</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="venue-card">
-        <div class="venue-top">
-          <div class="venue-badge">🌊 白天景點</div>
-          <div class="venue-name">皮皮島 Phi Phi Islands</div>
-          <div class="venue-area">📍 快艇約 45 分鐘 · 一日遊套裝</div>
-        </div>
-        <div class="venue-body">
-          <p class="venue-desc">《海灘》電影拍攝地，世界頂級海景。清澈翡翠海水、石灰岩峭壁，浮潛看魚看珊瑚。建議訂含午餐的一日遊套裝，普吉出發約 1,000–1,500 泰銖。</p>
-          <div class="venue-tags">
-            <span class="tag hot">必去</span>
-            <span class="tag">浮潛天堂</span>
-            <span class="tag">需預訂</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="tips-box">
-      <h4>⚠️ 成人娛樂注意事項</h4>
-      <ul>
-        <li>GoGo Bar 入場通常免費，但飲料消費要看清楚標價，避免事後帳單糾紛</li>
-        <li>Simon Cabaret 演出每場約 70–80 分鐘，建議提前 20 分鐘入座</li>
-        <li>凌晨 2 點後 Bangla Road 人潮最為混雜，注意隨身財物安全</li>
-        <li>泰國年齡限制為 20 歲，部分場所會查驗護照</li>
-        <li>拍照前務必詢問對方，尊重當地文化與從業人員</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- CHAPTER 4 -->
-<section id="ch4">
-  <div class="chapter-header">
-    <div class="chapter-num">Chapter Four</div>
-    <h2 class="chapter-title">特色美食指南</h2>
-    <div class="chapter-line"></div>
-  </div>
-  <div class="container">
-    <div class="grid-2">
-      <div class="food-item">
-        <div class="food-emoji">🦞</div>
-        <div class="food-info">
-          <h4>泰式炒河粉 Pad Thai</h4>
-          <p>街邊攤最正宗，加上蝦仁、豆芽、花生碎，擠上青檸汁，是每日必吃的靈魂食物。Patong 夜市攤位品質均佳。</p>
-          <span class="food-price">約 80–150 泰銖</span>
-        </div>
-      </div>
-      <div class="food-item">
-        <div class="food-emoji">🍜</div>
-        <div class="food-info">
-          <h4>瑪莎曼咖哩 Massaman Curry</h4>
-          <p>普吉島最具代表性的南部咖哩，椰奶基底、微甜微辣、搭配白飯或米餅。Phuket Town 老街餐廳最道地。</p>
-          <span class="food-price">約 120–200 泰銖</span>
-        </div>
-      </div>
-      <div class="food-item">
-        <div class="food-emoji">🌮</div>
-        <div class="food-info">
-          <h4>普吉式春餅 Miang Kham</h4>
-          <p>用葉片包裹椰子、薑、辣椒、花生、蝦米，一口爆發多層次風味，是普吉老城區的傳統小吃。</p>
-          <span class="food-price">約 50–80 泰銖</span>
-        </div>
-      </div>
-      <div class="food-item">
-        <div class="food-emoji">🦀</div>
-        <div class="food-info">
-          <h4>咖哩螃蟹 Poo Pad Pong Karee</h4>
-          <p>鮮活螃蟹下咖哩粉炒，鮮甜鹹香一鍋搞定。帕東海鮮餐廳必點，可依重量計費，約 300–600 泰銖一隻。</p>
-          <span class="food-price">約 300–600 泰銖</span>
-        </div>
-      </div>
-      <div class="food-item">
-        <div class="food-emoji">🥤</div>
-        <div class="food-info">
-          <h4>泰式奶茶 Cha Yen</h4>
-          <p>橘紅色泰式奶茶，入口甜蜜，適合大熱天解暑。市場、攤販隨處可見，現沖現賣最新鮮。</p>
-          <span class="food-price">約 25–50 泰銖</span>
-        </div>
-      </div>
-      <div class="food-item">
-        <div class="food-emoji">🍢</div>
-        <div class="food-info">
-          <h4>夜市烤串 BBQ Skewers</h4>
-          <p>Bangla Road 附近夜市，各種海鮮肉串現烤現吃，搭配甜辣醬，是夜間小酌的最佳搭檔。</p>
-          <span class="food-price">約 30–80 泰銖/串</span>
+  <!-- 皮皮島 -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">🏝</div>
+      <div class="entry-meta">
+        <div class="entry-name">皮皮島 Phi Phi Islands</div>
+        <div class="entry-loc">📍 從普吉島快艇約 45–60 分鐘</div>
+        <div class="entry-tags">
+          <span class="etag boat">快艇 Speedboat</span>
+          <span class="etag boat">渡輪 Ferry</span>
+          <span class="etag bus">套裝行程含接送</span>
         </div>
       </div>
     </div>
-
-    <div style="margin-top:2rem;">
-      <div class="tips-box">
-        <h4>🍽 美食地圖推薦地點</h4>
-        <ul>
-          <li><strong style="color:var(--text)">Patong 夜市</strong>：帕東海灘路旁，每晚開到凌晨，平價豐富首選</li>
-          <li><strong style="color:var(--text)">Phuket Town 老街週日市集</strong>：當地人也愛去，最道地的普吉小吃集散地</li>
-          <li><strong style="color:var(--text)">Banzaan Fresh Market</strong>：帕東最大市場，樓上有各式熟食攤，平價海鮮料理</li>
-          <li><strong style="color:var(--text)">Malin Plaza Patong</strong>：夜間市集，泰式烤肉、炒飯、點心應有盡有</li>
-        </ul>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot boat"></div><div class="ti-label">快艇一日遊套裝（最推薦）</div></div>
+          <div class="ti-body">訂含酒店接送的快艇一日遊套裝。早上 7–8 點從飯店接送至碼頭（Rassada Pier），快艇約 45 分鐘抵達，含導覽、浮潛裝備、午餐，下午 4–5 點返回帕東。</div>
+          <span class="ti-price">含接送套裝 1,000–1,800 泰銖/人</span>
+        </div>
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot boat"></div><div class="ti-label">渡輪（慢船 Ferry）</div></div>
+          <div class="ti-body">從 Rassada Pier 搭乘渡輪，車程約 1.5–2 小時，票價較便宜但較慢。需自行前往碼頭（Patong 至碼頭約需 Grab 30 分鐘）。</div>
+          <span class="ti-price">單程 200–350 泰銖</span>
+        </div>
       </div>
+      <div class="entry-note">🚤 <strong>碼頭資訊：</strong>主碼頭為 Rassada Pier（位於 Phuket Town 東側），部分行程從 Chalong Pier 出發。建議訂套裝含接送，省去自行找碼頭的麻煩。可在 Klook / GetYourGuide 提前預訂。</div>
     </div>
   </div>
-</section>
 
-<!-- CHAPTER 5 -->
-<section id="ch5">
-  <div class="chapter-header">
-    <div class="chapter-num">Chapter Five</div>
-    <h2 class="chapter-title">費用估算</h2>
-    <div class="chapter-line"></div>
-  </div>
-  <div class="container">
-
-    <div style="overflow-x:auto;border-radius:16px;border:1px solid rgba(201,168,76,0.2);margin-bottom:2rem;">
-      <table class="budget-table">
-        <thead>
-          <tr>
-            <th>項目分類</th>
-            <th>明細</th>
-            <th>預算（新台幣）</th>
-            <th>備註</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="item-name">✈️ 機票</td>
-            <td>台北 ↔ 普吉 來回<br>（曼谷轉機或直飛）</td>
-            <td class="price">NT$8,000–18,000</td>
-            <td>旺季建議提前 2 個月訂</td>
-          </tr>
-          <tr>
-            <td class="item-name">🏨 住宿</td>
-            <td>4 晚 · Patong 核心區</td>
-            <td class="price">NT$3,200–18,000</td>
-            <td>背包客宿 NT$800/晚起</td>
-          </tr>
-          <tr>
-            <td class="item-name">🚌 交通</td>
-            <td>島內 Grab、宋條車<br>機場接送</td>
-            <td class="price">NT$1,500–3,000</td>
-            <td>以 Grab 為主要交通工具</td>
-          </tr>
-          <tr>
-            <td class="item-name">🍜 餐飲</td>
-            <td>早中晚 + 宵夜 × 5 天<br>以特色小吃街食為主</td>
-            <td class="price">NT$2,500–5,000</td>
-            <td>約每日 NT$500–1,000</td>
-          </tr>
-          <tr>
-            <td class="item-name">🎭 娛樂</td>
-            <td>Simon Cabaret<br>島嶼一日遊（皮皮島）<br>夜生活消費</td>
-            <td class="price">NT$5,000–12,000</td>
-            <td>夜生活消費視個人而定</td>
-          </tr>
-          <tr>
-            <td class="item-name">💆 按摩 SPA</td>
-            <td>全身按摩 × 2 次<br>精油 SPA × 1 次</td>
-            <td class="price">NT$800–2,000</td>
-            <td>CP 值極高，強烈推薦</td>
-          </tr>
-          <tr>
-            <td class="item-name">🛍 購物</td>
-            <td>伴手禮、紀念品<br>泰式香皂、芒果乾等</td>
-            <td class="price">NT$1,000–3,000</td>
-            <td>視個人購物慾望</td>
-          </tr>
-          <tr class="total-row">
-            <td colspan="2" style="font-family:'Playfair Display',serif;font-size:1.1rem;">✦ 五天四夜 總費用估算</td>
-            <td class="price" style="font-size:1.1rem;">NT$22,000–61,000</td>
-            <td>雙人出遊可分攤住宿</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="grid-3">
-      <div class="card">
-        <div class="card-icon">💰</div>
-        <div class="card-title">精省版（背包客）</div>
-        <div class="card-body">住廉價旅館、以街食為主、搭宋條車、<strong>約 NT$22,000–28,000</strong> 可完成五天四夜之旅</div>
-      </div>
-      <div class="card">
-        <div class="card-icon">✨</div>
-        <div class="card-title">舒適版（一般遊客）</div>
-        <div class="card-body">住三星酒店、混搭餐廳小吃、Grab 出行，<strong>約 NT$35,000–45,000</strong> 的舒適旅遊體驗</div>
-      </div>
-      <div class="card">
-        <div class="card-icon">👑</div>
-        <div class="card-title">豪奢版（享樂主義者）</div>
-        <div class="card-body">住四五星度假村、海鮮大餐、私人快艇，<strong>約 NT$55,000–80,000+</strong> 的頂級放縱體驗</div>
+  <!-- 珊瑚島 -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">🐠</div>
+      <div class="entry-meta">
+        <div class="entry-name">珊瑚島 Coral Island</div>
+        <div class="entry-loc">📍 從 Chalong Pier 快艇約 15–20 分鐘</div>
+        <div class="entry-tags">
+          <span class="etag boat">快艇 Speedboat</span>
+          <span class="etag bus">套裝含接送</span>
+        </div>
       </div>
     </div>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot bus"></div><div class="ti-label">套裝行程含接送（推薦）</div></div>
+          <div class="ti-body">訂含酒店接送的珊瑚島一日遊套裝，從帕東接送至 Chalong Pier，快艇約 15–20 分鐘即達。含水上活動體驗與午餐。</div>
+          <span class="ti-price">含接送套裝 800–1,500 泰銖/人</span>
+        </div>
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot grab"></div><div class="ti-label">自行前往碼頭</div></div>
+          <div class="ti-body">叫 Grab 從 Patong 前往 Chalong Pier 約 25–35 分鐘，再購買快艇票出發。返程同樣自行叫車，需注意碼頭附近 Grab 較難叫到。</div>
+          <span class="ti-price">Grab 單程 250–400 泰銖 + 船票</span>
+        </div>
+      </div>
+      <div class="entry-note">💧 <strong>碼頭資訊：</strong>珊瑚島主要從 Chalong Pier 出發（恰龍碼頭），此碼頭距帕東約 10 km。部分旅行社提供從帕東海灘長尾船直達服務，可直接在海灘詢問。</div>
+    </div>
   </div>
-</section>
+</div>
 
-<!-- FOOTER -->
-<div class="footer">
-  <div class="footer-title">Bon Voyage</div>
-  <p class="footer-text" style="color:var(--gold);font-family:'Noto Serif TC',serif;font-size:1rem;margin-bottom:1rem;">普吉島等著你——白天陽光沙灘，夜晚燈紅酒綠</p>
-  <p class="footer-text">本旅遊指南由旅遊達人精心規劃<br>所有費用為參考估算，實際消費依當下匯率及個人選擇而異<br>請遵守當地法律法規，理性享樂，安全第一</p>
+<!-- TAB 4: 著名小吃 -->
+<div class="section" id="food">
+  <p class="sec-title" style="margin-top:0;">著名小吃地點交通</p>
+  <p class="sec-sub">普吉島小吃分散於各地，以下為主要覓食地點的交通方式。</p>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>步行</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--blue)"></div>Grab</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--purple)"></div>宋條車</div>
+  </div>
+
+  <!-- Malin Plaza -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">🌮</div>
+      <div class="entry-meta">
+        <div class="entry-name">Malin Plaza 帕東夜市</div>
+        <div class="entry-loc">📍 Patong Beach Road · 距 Bangla Road 步行 5 分鐘</div>
+        <div class="entry-tags">
+          <span class="etag walk">步行首選</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot walk"></div><div class="ti-label">步行（最方便）</div></div>
+          <div class="ti-body">位於 Patong 海灘路旁，從 Bangla Road 沿海灘方向步行約 5 分鐘。夜市每晚開放至深夜，是宵夜首選。泰式炒河粉、海鮮烤串、芒果糯米飯均有。</div>
+          <span class="ti-price">免費</span>
+        </div>
+      </div>
+      <div class="entry-note">🍢 <strong>必吃：</strong>炒河粉 80–120 泰銖、海鮮烤串 30–60 泰銖/串、芒果糯米飯 60–80 泰銖、泰式奶茶 30–50 泰銖</div>
+    </div>
+  </div>
+
+  <!-- Banzaan Market -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">🦀</div>
+      <div class="entry-meta">
+        <div class="entry-name">Banzaan Fresh Market</div>
+        <div class="entry-loc">📍 Patong 中心 · 距 Bangla Road 步行 5 分鐘</div>
+        <div class="entry-tags">
+          <span class="etag walk">步行</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot walk"></div><div class="ti-label">步行</div></div>
+          <div class="ti-body">帕東最大的市場，一樓賣新鮮海鮮蔬果，二樓熟食區有各式現煮料理。從 Bangla Road 步行約 5 分鐘，位於 Bangla Road 與 Phang Muang Sai Kor Road 交叉口附近。</div>
+          <span class="ti-price">免費</span>
+        </div>
+      </div>
+      <div class="entry-note">🦐 <strong>必吃：</strong>可在一樓選好活海鮮（蝦、螃蟹、魚），交給二樓攤位代為料理，新鮮度最高。冬陰功湯、咖哩炒螃蟹在此最道地。</div>
+    </div>
+  </div>
+
+  <!-- Phuket Town Walking Street -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">🎪</div>
+      <div class="entry-meta">
+        <div class="entry-name">普吉舊城週日夜市 Sunday Walking Street</div>
+        <div class="entry-loc">📍 Thalang Road, Phuket Old Town · 距 Patong 約 15 km</div>
+        <div class="entry-tags">
+          <span class="etag grab">Grab 推薦</span>
+          <span class="etag song">宋條車</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot grab"></div><div class="ti-label">Grab（推薦）</div></div>
+          <div class="ti-body">從帕東叫 Grab 約 20–30 分鐘車程，車費 350–500 泰銖。週日夜市 16:00 開始，結束後（約 22:00）現場人多叫車較慢，建議提前預約。</div>
+          <span class="ti-price">單程 350–500 泰銖</span>
+        </div>
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot song"></div><div class="ti-label">宋條車</div></div>
+          <div class="ti-body">宋條車從 Patong 至 Phuket Town，每 30 分鐘一班，車程約 50 分鐘，運行至 18:00。若夜市結束時間晚，需叫 Grab 返回。</div>
+          <span class="ti-price">單程 40–50 泰銖</span>
+        </div>
+      </div>
+      <div class="entry-note">📅 <strong>只在週日！</strong>Walking Street 週日 16:00–22:00 開放，其他時間為一般道路。普吉春餅、在地咖哩、現打果汁、傳統甜點是重點小吃，百攤雲集道地程度最高。</div>
+    </div>
+  </div>
+
+  <!-- Prachanukhro Road 街食 -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">🍜</div>
+      <div class="entry-meta">
+        <div class="entry-name">Prachanukhro Road 街食街</div>
+        <div class="entry-loc">📍 Patong 內部街道 · 步行或短程嘟嘟車</div>
+        <div class="entry-tags">
+          <span class="etag walk">步行</span>
+          <span class="etag tuk">嘟嘟車</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot walk"></div><div class="ti-label">步行</div></div>
+          <div class="ti-body">Prachanukhro Road 位於 Patong 區內，從 Bangla Road 往內走約 5–10 分鐘可達。烤肉串、椰子、各式麵食攤位集中，白天與夜晚均有攤販。</div>
+          <span class="ti-price">免費</span>
+        </div>
+      </div>
+      <div class="entry-note">🌶 <strong>必吃：</strong>烤肉串 30–50 泰銖/串、泰式奶茶 25–40 泰銖、各式麵食 60–100 泰銖。當地人也常來，價格比海灘邊攤位更實惠。</div>
+    </div>
+  </div>
+
+  <!-- Patong Beach Road 海鮮餐廳 -->
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-icon">🦞</div>
+      <div class="entry-meta">
+        <div class="entry-name">Patong Beach Road 海鮮餐廳帶</div>
+        <div class="entry-loc">📍 帕東海灘路沿線 · 步行即達</div>
+        <div class="entry-tags">
+          <span class="etag walk">步行首選</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry-body">
+      <div class="transport-grid">
+        <div class="transport-item">
+          <div class="ti-head"><div class="ti-dot walk"></div><div class="ti-label">步行</div></div>
+          <div class="ti-body">帕東海灘路（Beach Road）沿線密集分佈多家海鮮餐廳，從帕東任何地方步行 5–15 分鐘可達。選有水族箱展示活海鮮的店家，新鮮度更有保障。</div>
+          <span class="ti-price">免費</span>
+        </div>
+      </div>
+      <div class="entry-note">🦀 <strong>點餐技巧：</strong>咖哩炒螃蟹（Poo Pad Pong Karee）、冬陰功湯、清蒸魚是必點三件組。依重量計費的螃蟹建議事先確認每公斤價格，避免帳單驚喜。</div>
+    </div>
+  </div>
 </div>
 
 <script>
-const starsContainer = document.getElementById('stars');
-for(let i=0;i<80;i++){
-  const star = document.createElement('div');
-  star.className='star';
-  star.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s;opacity:${0.2+Math.random()*0.8}`;
-  starsContainer.appendChild(star);
+function showTab(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
 }
 </script>
 </body>
